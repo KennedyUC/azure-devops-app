@@ -1,0 +1,13 @@
+trigger:
+- main
+
+pr:
+- '*'
+
+jobs:
+- template: deploy-template.yml
+  parameters:
+    imageRepository: 'container-registry/repository-name'
+    azureSubscription: 'azure-subscription-id'
+    webAppName: 'app-service-name'
+    imageTag: 'image-tag'

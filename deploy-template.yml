@@ -1,0 +1,31 @@
+parameters:
+- name: imageRepository
+  type: string
+  displayName: 'Image Repository'
+
+- name: imageTag
+  type: string
+  displayName: 'Image Tag'
+
+- name: azureSubscription
+  type: string
+  displayName: 'Azure Subscription'
+
+- name: webAppName
+  type: string
+  displayName: 'Azure App Service Name'
+
+jobs:
+- job: DeployContainer
+  displayName: 'Deploy Container'
+  pool:
+    vmImage: 'ubuntu-latest'
+
+  steps:
+  - task: AzureWebAppContainer@1
+    displayName: 'Azure Web App on Container Deploy'
+    inputs:
+      azureSubscription: $(azureSubscription)
+      appName: $(webAppName)
+      containers: $(imageRepository):$(imageTag)
+      command: Update
